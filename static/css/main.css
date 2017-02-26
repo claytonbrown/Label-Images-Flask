@@ -1,0 +1,33 @@
+/*.label-image {
+  position: absolute;
+    width: 40px;
+    left: 50%;
+    margin-left: -442.5px;
+}*/
+
+body {
+  background: #F3F4F5;
+  color: #878787;
+  line-height: .875em;
+  height: auto;
+}
+
+.label-group {
+  margin-bottom: 32px;
+}
+
+.img-block {
+  height: 100%;
+}
+
+.radio-selector {
+  margin-right: 16px;
+}
+
+.choice-label {
+  font-size: 14px;
+}
+
+.btn-block {
+  margin-top: 16px;
+}
