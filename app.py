@@ -5,6 +5,7 @@ from options import DEFAULTS
 
 app = Flask(__name__)
 
+LABEL_CLASS = 1 #1 for positive, 0 for negative
 imageList = getImagesLabellingList()
 count = 0
 
@@ -14,7 +15,8 @@ def index():
     return render_template('index.html',
         imageDir=IMAGEPATH,
         imageName=imageList[count],
-        options=DEFAULTS)
+        options=DEFAULTS,
+        class=LABEL_CLASS)
 
 @app.route('/save', methods=['POST'])
 def save():
