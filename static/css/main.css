@@ -1,9 +1,16 @@
-/*.label-image {
-  position: absolute;
-    width: 40px;
-    left: 50%;
-    margin-left: -442.5px;
-}*/
+.label-image {
+  padding-top: 16px;
+  display: block;
+  margin: auto;
+  width: 90%
+
+}
+
+#image-title {
+  color: white;
+  padding-top: 10px;
+  text-align: center;
+}
 
 body {
   background: #F3F4F5;
@@ -13,21 +20,38 @@ body {
 }
 
 .label-group {
-  margin-bottom: 32px;
+  margin-bottom: 40px;
 }
 
 .img-block {
-  height: 100%;
+  background-color: #3E5D85;
+  height:100vh;
 }
 
-.radio-selector {
-  margin-right: 16px;
+.label-block {
+  padding: 32px;
+  background-color: #C0D3EB;
+  height:100vh;
+}
+
+.choice-selector {
+  margin-top: 0px;
+  margin-right: 10px;
+  border-radius: 8px;
+  padding: 8px 12px 8px 12px;
+  color: white;
+  background-color: #7D7F85;
+  font-size: 14px;
 }
 
 .choice-label {
-  font-size: 14px;
+
 }
 
 .btn-block {
   margin-top: 16px;
+}
+
+.label-row{
+  margin-top: 18px;
 }

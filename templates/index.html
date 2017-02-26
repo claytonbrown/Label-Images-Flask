@@ -8,24 +8,24 @@
         <link rel="stylesheet" href="/static/css/main.css">
     </head>
     <body>
-        <div class="col-md-4 img-block">
+        <div class="col-md-5 img-block">
+          <h3 id="image-title">{{imageName}}</h3>
           <img class=".center-block label-image" src="/static/img/{{imageName}}" />
         </div>
-        <div class="col-md-8">
+        <div class="col-md-7 label-block">
           <form action="{{ url_for('save') }}" method="POST">
             <input type = "hidden" name = "image_name" value = "{{imageName}}" />
-            <input type = "hidden" name = "score" value = "{{class}}" />
+            <input type = "hidden" name = "score" value = "{{labelClass}}" />
 
             <div class="btn-group" role="group" aria-label="...">
               {% for category, choices in options.items() %}
               <div class="label-group">
-                <h4><label class="category-header label label-primary">{{category}}</label></h4>
-                <p>
+                <h4><label class="label label-primary">{{category}}</label></h4>
+                <p class="label-row">
                 {% for choice in choices %}
-                <span class="choice-label label label-default">{{choice}}</span>
-                  <input type="radio" id="{{ category }}-{{ choice }}_button"
-                  class="radio-selector" name="{{category}}-{{choice}}"
-                  value="1">
+                <span class="choice-selector" {%if category=='colors'%}: style="background-color:{{choice}};"{%endif%}>
+                  <span class="choice-label">{{choice}}</span>
+                  <input type="checkbox" name="{{category}}-{{choice}}" value="1">
                 </span>
                 {% endfor %}
               </p>

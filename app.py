@@ -16,7 +16,7 @@ def index():
         imageDir=IMAGEPATH,
         imageName=imageList[count],
         options=DEFAULTS,
-        class=LABEL_CLASS)
+        labelClass=LABEL_CLASS)
 
 @app.route('/save', methods=['POST'])
 def save():
