@@ -8,7 +8,7 @@ into static/img folder.
 3. Edit LABEL_CLASS in app.py to reflect the class you are labelling (1 for positive,
   0 for negative)
 
-Note:
+##Note:
 1. Headers for your CSV file will be generated from the labels in options.py
 2. When all images in your static/img folder are labelled, the app will exit with
 index_out_of_bounds
