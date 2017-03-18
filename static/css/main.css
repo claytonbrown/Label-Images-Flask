@@ -1,13 +1,20 @@
 .label-image {
   padding-top: 16px;
   display: block;
-  margin: auto;
-  width: 90%
+  position: fixed;
+  top: 65px;
+  left: 40px;
 
+  margin: auto;
+  width: 36.5%;
+  max-height: 750px;
+  object-fit: contain;
 }
 
 #image-title {
+
   color: white;
+
   padding-top: 10px;
   text-align: center;
 }
@@ -20,38 +27,51 @@ body {
 }
 
 .label-group {
-  margin-bottom: 40px;
+  margin-bottom: 32px;
 }
 
 .img-block {
   background-color: #3E5D85;
-  height:100vh;
+  height:225vh;
 }
 
 .label-block {
   padding: 32px;
   background-color: #C0D3EB;
-  height:100vh;
+  height:225vh;
 }
 
 .choice-selector {
   margin-top: 0px;
-  margin-right: 10px;
+  margin-right: 6px;
+  border-radius: 0px;
+  height: 30px;
+}
+
+.choice-selector label {
+  cursor: pointer;
+	height: 33px;
+	background: #EDF2F2;
+  padding: 9px 11px 8px 11px;
   border-radius: 8px;
-  padding: 8px 12px 8px 12px;
-  color: white;
-  background-color: #7D7F85;
-  font-size: 14px;
+	border:1px solid white;
+  color: black;
 }
 
-.choice-label {
-
+input[type=checkbox] {
+  display: none;
 }
+
+.choice-selector input[type=checkbox]:checked + label {
+	background-color: #313333;
+  color: #EDF2F2;
+}
+
 
 .btn-block {
   margin-top: 16px;
 }
 
 .label-row{
-  margin-top: 18px;
+  margin-top: 6px;
 }

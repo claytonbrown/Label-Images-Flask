@@ -2,18 +2,18 @@ from PIL import Image
 import csv
 import os
 import glob
-from options import DEFAULTS
+import options
 
 #Change File Paths to Your Local Paths
-CSVPATH = 'sgm_data.csv'
+CSVPATH = 'trendy_data_set_1.csv'
 IMAGEPATH = 'static/img'
 
 #Retrive header names from DEFAULTS
 def retrieveFieldNames():
     fieldnames = list()
     fieldnames.append('image_name')
-    for key in DEFAULTS.keys():
-        for value in DEFAULTS[key]:
+    for key in options.DEFAULTS.keys():
+        for value in options.DEFAULTS[key]:
             name = key + "-" + value
             fieldnames.append(name)
     fieldnames.append('score') #1 for positive class
@@ -47,7 +47,7 @@ def getImagesLabellingList():
     #If CSV File Exists
     if os.path.isfile(CSVPATH):
         for filename in glob.glob('static/img/*.jpg'): #assuming jpg
-            if not isFileLabelled(filename):
+            if not isFileLabelled(filename[11:]):
                 images_file_list.append(filename[11:])
     else:
         for filename in glob.glob('static/img/*.jpg'): #assuming jpg

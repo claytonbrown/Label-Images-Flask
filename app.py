@@ -5,7 +5,7 @@ from options import DEFAULTS
 
 app = Flask(__name__)
 
-LABEL_CLASS = 1 #1 for positive, 0 for negative
+LABEL_CLASS = 2 #1 for classic, 2 for trendy, 0 for negative
 imageList = getImagesLabellingList()
 count = 0
 

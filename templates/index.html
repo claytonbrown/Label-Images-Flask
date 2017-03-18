@@ -23,9 +23,10 @@
                 <h4><label class="label label-primary">{{category}}</label></h4>
                 <p class="label-row">
                 {% for choice in choices %}
-                <span class="choice-selector" {%if category=='colors'%}: style="background-color:{{choice}};"{%endif%}>
-                  <span class="choice-label">{{choice}}</span>
-                  <input type="checkbox" name="{{category}}-{{choice}}" value="1">
+                <span class="choice-selector" >
+                  <!-- {%if category=='colors'%}: style="background-color:{{choice}};"{%endif%} -->
+                  <input type="checkbox" id="{{category}}-{{choice}}" name="{{category}}-{{choice}}" value="1">
+                  <label for="{{category}}-{{choice}}" >{{choice}}</label>
                 </span>
                 {% endfor %}
               </p>
