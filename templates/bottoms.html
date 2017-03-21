@@ -18,15 +18,21 @@
             <!-- <input type = "hidden" name = "clothing_type" value = "tops" /> -->
             <div class="btn-group" role="group" aria-label="...">
               {% for category, choices in options.items() %}
-              <div class="label-group">
+              <div class="label-group" id="{{category}}">
                 <h4><label class="label label-primary">{{category}}</label></h4>
                 <p class="label-row">
                 {% for choice in choices %}
-                <span class="choice-selector" >
-                  <!-- {%if category=='colors'%}: style="background-color:{{choice}};"{%endif%} -->
-                  <input type="checkbox" id="{{category}}-{{choice}}" name="{{category}}-{{choice}}" value="1">
-                  <label for="{{category}}-{{choice}}" >{{choice}}</label>
-                </span>
+                  {% if 'color' in category %}
+                    <span class="choice-selector">
+                      <input type="checkbox" id="{{category}}-{{choice}}" name="{{category}}-{{choice}}" value="1" style="background-color:{{choice}}">
+                      <label for="{{category}}-{{choice}}" style="background-color:{{choice}}">{{choice}}</label>
+                    </span>
+                  {% else %}
+                    <span class="choice-selector">
+                      <input type="checkbox" id="{{category}}-{{choice}}" name="{{category}}-{{choice}}" value="1">
+                      <label for="{{category}}-{{choice}}" >{{choice}}</label>
+                    </span>
+                  {% endif %}
                 {% endfor %}
               </p>
             </div>
@@ -35,5 +41,32 @@
             <button type="submit" class="btn btn-success btn-lg btn-block">Done</button>
           </form>
         </div>
+
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script type="text/javascript">
+
+          document.getElementById('denim-style').style.display = 'none';
+
+          function denim(){
+            var elem = document.getElementById('bottom-material-denim/jeans').checked;
+            if(elem == true){
+              document.getElementById('denim-style').style.display = 'block';
+            }
+            else{
+              document.getElementById('denim-style').style.display = 'none';
+              var denimstyle = document.getElementById('denim-style');
+              $(denimstyle).siblings('div[id="denim-style"]').children('input[type="checkbox"]').prop('checked',false);
+              console.log($(denimstyle).siblings('div[id="denim-style"]').children('input[type="checkbox"]'));
+            }
+          }
+
+          document.getElementById('bottom-material-denim/jeans').onclick = denim;
+          $('input[type="checkbox"]').on('change', function() {
+            var id = $(this).parent('div[class="label-group"]').prop("id");
+            console.log(id);  
+            $(this).parent().siblings().children('input[type="checkbox"]').prop('checked', false);
+          });
+       </script>
     </body>
 </html>

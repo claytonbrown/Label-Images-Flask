@@ -11,11 +11,17 @@ SHOESCSV = 'shoes.csv'
 
 
 #Retrive header names from DEFAULTS
-def retrieveFieldNames():
+def retrieveFieldNames(clothing_type):
+    if clothing_type == 'Tops':
+        OPTS = options.TOPS
+    elif clothing_type == 'Bottoms':
+        OPTS = options.BOTTOMS
+    elif clothing_type == 'Shoes':
+        OPTS = options.SHOES
     fieldnames = list()
     fieldnames.append('image_name')
-    for key in options.DEFAULTS.keys():
-        for value in options.DEFAULTS[key]:
+    for key in OPTS.keys():
+        for value in OPTS[key]:
             name = key + "-" + value
             fieldnames.append(name)
     return fieldnames
@@ -30,7 +36,7 @@ def writeNewRow(data, clothing_type):
         CSVPATH = SHOESCSV
     file_exists = os.path.isfile(CSVPATH)
     with open(CSVPATH, 'a', newline='') as csvfile:
-        dataWriter = csv.DictWriter(csvfile, fieldnames=retrieveFieldNames(), restval=0, lineterminator='\n')
+        dataWriter = csv.DictWriter(csvfile, fieldnames=retrieveFieldNames(clothing_type), restval=0, lineterminator='\n')
         if not file_exists:
             dataWriter.writeheader()  # file doesn't exist yet, write a header
         dataWriter.writerow(data)

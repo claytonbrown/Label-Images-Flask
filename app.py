@@ -1,7 +1,7 @@
 from flask import (Flask, render_template, redirect,
                    url_for, request, make_response)
 from file_management import getImagesLabellingList, writeNewRow
-from options import DEFAULTS, TOPS, BOTTOMS, SHOES
+from options import TOPS, BOTTOMS, SHOES
 
 app = Flask(__name__)
 
@@ -29,7 +29,7 @@ def index():
 
 @app.route('/save_tops', methods=['POST'])
 def save_tops():
-    response = make_response(redirect(url_for('index'))) ### <-- go next pic? because of count
+    response = make_response(redirect(url_for('tops')))
     #Saves labels to CSV file
     labelledDict = dict(request.form.items()) #request the POST-ed info
     print(labelledDict)
@@ -40,7 +40,7 @@ def save_tops():
 
 @app.route('/save_bottoms', methods=['POST'])
 def save_bottoms():
-    response = make_response(redirect(url_for('index'))) ### <-- go next pic? because of count
+    response = make_response(redirect(url_for('bottoms')))
     #Saves labels to CSV file
     labelledDict = dict(request.form.items()) #request the POST-ed info
     print(labelledDict)
@@ -51,7 +51,7 @@ def save_bottoms():
 
 @app.route('/save_shoes', methods=['POST'])
 def save_shoes():
-    response = make_response(redirect(url_for('index'))) ### <-- go next pic? because of count
+    response = make_response(redirect(url_for('shoes')))
     #Saves labels to CSV file
     labelledDict = dict(request.form.items()) #request the POST-ed info
     print(labelledDict)

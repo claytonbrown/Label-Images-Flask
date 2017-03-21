@@ -54,7 +54,7 @@ body {
 	background: #EDF2F2;
   padding: 9px 11px 8px 11px;
   border-radius: 8px;
-	border:1px solid white;
+	border:3px solid white;
   color: black;
 }
 
@@ -64,7 +64,9 @@ input[type=checkbox] {
 
 .choice-selector input[type=checkbox]:checked + label {
 	background-color: #313333;
-  color: #EDF2F2;
+/*  color: #EDF2F2;*/
+  color: lime;
+  border: 3px solid lime;
 }
 
 

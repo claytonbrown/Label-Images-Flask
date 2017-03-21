@@ -22,11 +22,17 @@
                 <h4><label class="label label-primary">{{category}}</label></h4>
                 <p class="label-row">
                 {% for choice in choices %}
-                <span class="choice-selector" >
-                  <!-- {%if category=='colors'%}: style="background-color:{{choice}};"{%endif%} -->
-                  <input type="checkbox" id="{{category}}-{{choice}}" name="{{category}}-{{choice}}" value="1">
-                  <label for="{{category}}-{{choice}}" >{{choice}}</label>
-                </span>
+                  {% if 'color' in category %}
+                    <span class="choice-selector">
+                      <input type="checkbox" id="{{category}}-{{choice}}" name="{{category}}-{{choice}}" value="1" style="background-color:{{choice}}">
+                      <label for="{{category}}-{{choice}}" style="background-color:{{choice}}">{{choice}}</label>
+                    </span>
+                  {% else %}
+                    <span class="choice-selector">
+                      <input type="checkbox" id="{{category}}-{{choice}}" name="{{category}}-{{choice}}" value="1">
+                      <label for="{{category}}-{{choice}}" >{{choice}}</label>
+                    </span>
+                  {% endif %}
                 {% endfor %}
               </p>
             </div>
