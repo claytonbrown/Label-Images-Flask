@@ -7,13 +7,13 @@ COLORS = [
     "brown",
     "grey",
     "blue",
-    "navy-blue",
+    "navy",
     "teal",
     "green",
-    "olive-green",
+    "olive",
     "pink",
     "red",
-    "burgundy",
+    "maroon",
     "purple",
     "orange",
     "yellow",
@@ -30,9 +30,11 @@ PATTERNS = [
     "plaid"
 ]
 
+# ADD MORE MATERIALS?
 MATERIALS = [
     "denim",
-    "dry-fit"
+    "dry-fit",
+    "cotton"
 ]
 
 TOP_TYPE = [
@@ -44,6 +46,14 @@ TOP_TYPE = [
     "singlet"
 ]
 
+#this is more specific to t-shirts
+TOP_FIT = [
+    "slim-fit",
+    "longline",
+    "baggy"
+]
+
+#should we split into t-shirt and shirt style?
 TOP_STYLE = [
     "oxford",
     "dress",
@@ -53,7 +63,7 @@ TOP_STYLE = [
     "pocket",
     "acid-wash",
     "granddad-collar",
-    "placket"
+    "placket",
 ]
 
 BOTTOM_TYPE = [
@@ -106,19 +116,24 @@ DEFAULTS["shoes-secondary-color"] = COLORS
 DEFAULTS["shoes-type"] = SHOE_TYPE
 DEFAULTS["shoes-others"] = SHOE_OTHERS
 
-# DEFAULTS = {
-#     "top-primary-color": COLORS,
-#     "top-secondary-color": COLORS,
-#     "top-type": TOP_TYPE,
-#     "top-style": TOP_STYLE,
-#     "top-material": MATERIALS,
-#     "bottom-primary-color": COLORS,
-#     "bottom-secondary-color": COLORS,
-#     "bottom-type": BOTTOM_TYPE,
-#     "bottom-style": BOTTOM_STYLE,
-#     "bottom-material": MATERIALS,
-#     "shoes-primary-color": COLORS,
-#     "shoes-secondary-color": COLORS,
-#     "shoe-type": SHOE_TYPE,
-#     "shoe-others": SHOE_OTHERS
-# }
+TOPS = OrderedDict()
+TOPS["top-primary-color"] = COLORS
+TOPS["top-secondary-color"] = COLORS
+TOPS["top-type"] = TOP_TYPE
+TOPS["top-patterns"] = PATTERNS
+TOPS["top-style"] = TOP_STYLE
+TOPS["top-material"] = MATERIALS
+
+BOTTOMS = OrderedDict()
+BOTTOMS["bottom-primary-color"] = COLORS
+BOTTOMS["bottom-secondary-color"] = COLORS
+BOTTOMS["bottom-type"] = BOTTOM_TYPE
+BOTTOMS["bottom-patterns"] = PATTERNS
+BOTTOMS["bottom-style"] = BOTTOM_STYLE
+BOTTOMS["bottom-material"] = MATERIALS
+
+SHOES = OrderedDict()
+SHOES["shoes-primary-color"] = COLORS
+SHOES["shoes-secondary-color"] = COLORS
+SHOES["shoes-type"] = SHOE_TYPE
+SHOES["shoes-others"] = SHOE_OTHERS

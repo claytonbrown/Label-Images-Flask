@@ -10,7 +10,7 @@
     <body>
         <div class="col-md-5 img-block">
           <h3 id="image-title">{{imageName}}</h3>
-          <img class=".center-block label-image" src="/static/img/{{imageName}}" />
+          <img class=".center-block label-image" src="{{imageName}}" />
         </div>
         <div class="col-md-7 label-block">
           <form action="{{ url_for('save') }}" method="POST">

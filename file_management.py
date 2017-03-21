@@ -5,8 +5,10 @@ import glob
 import options
 
 #Change File Paths to Your Local Paths
-CSVPATH = 'trendy_data_set_1.csv'
-IMAGEPATH = 'static/img'
+TOPSCSV = 'tops.csv'
+BOTTOMSCSV = 'bottoms.csv'
+SHOESCSV = 'shoes.csv'
+
 
 #Retrive header names from DEFAULTS
 def retrieveFieldNames():
@@ -16,20 +18,25 @@ def retrieveFieldNames():
         for value in options.DEFAULTS[key]:
             name = key + "-" + value
             fieldnames.append(name)
-    fieldnames.append('score') #1 for positive class
     return fieldnames
 
 #Writes a new row of data into csv file
-def writeNewRow(data):
+def writeNewRow(data, clothing_type):
+    if clothing_type == 'Tops':
+        CSVPATH = TOPSCSV
+    elif clothing_type == 'Bottoms':
+        CSVPATH = BOTTOMSCSV
+    elif clothing_type == 'Shoes':
+        CSVPATH = SHOESCSV
     file_exists = os.path.isfile(CSVPATH)
     with open(CSVPATH, 'a', newline='') as csvfile:
-        dataWriter = csv.DictWriter(csvfile, fieldnames=retrieveFieldNames(), restval=0, lineterminator='\n')#
+        dataWriter = csv.DictWriter(csvfile, fieldnames=retrieveFieldNames(), restval=0, lineterminator='\n')
         if not file_exists:
             dataWriter.writeheader()  # file doesn't exist yet, write a header
         dataWriter.writerow(data)
 
 #Checks if a file path already exists in CSV file
-def isFileLabelled(filename):
+def isFileLabelled(filename, CSVPATH):
     with open(CSVPATH, newline='') as csvfile:
         my_content = csv.reader(csvfile, delimiter=',')
         is_labelled = False
@@ -42,14 +49,21 @@ def isFileLabelled(filename):
             return False
 
 #Gets list of images to be labelled
-def getImagesLabellingList():
+def getImagesLabellingList(clothing_type):
     images_file_list = []
+    if clothing_type == 'Tops':
+        CSVPATH = TOPSCSV
+    elif clothing_type == 'Bottoms':
+        CSVPATH = BOTTOMSCSV
+    elif clothing_type == 'Shoes':
+        CSVPATH = SHOESCSV
+    path = 'static/Clothes/'+clothing_type+'/'
     #If CSV File Exists
     if os.path.isfile(CSVPATH):
-        for filename in glob.glob('static/img/*.jpg'): #assuming jpg
-            if not isFileLabelled(filename[11:]):
-                images_file_list.append(filename[11:])
+        for filename in glob.glob(path+'*.jpg'): #assuming jpg
+            if not isFileLabelled(filename, CSVPATH):
+                images_file_list.append(filename)
     else:
-        for filename in glob.glob('static/img/*.jpg'): #assuming jpg
-            images_file_list.append(filename[11:])
+        for filename in glob.glob(path+'*.jpg'): #assuming jpg
+            images_file_list.append(filename)
     return images_file_list
