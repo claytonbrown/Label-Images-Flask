@@ -1,0 +1,13 @@
+1) Copy the Clothes folder into the static folder
+2) Run python3 app.py
+3) Choose to label Tops/Bottoms/Shoes accordingly (your data set contains only one of the three types)
+
+LABELLING INSTRUCTIONS:
+- For most clothes, you only need to pick a primary colour, don't need to choose a secondary colour. Unless there is clearly more than one colour (~ >20% of the clothing is of another colour)
+- It is ok to leave a category blank if none of the labels are applicable
+- If unsure about the label please google
+- 
+
+
+Other notes:
+- For t-shirt-style, graphic-text means it has a considerably sized graphic logo or some text printed on it

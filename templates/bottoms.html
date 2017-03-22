@@ -55,18 +55,15 @@
             }
             else{
               document.getElementById('denim-style').style.display = 'none';
-              var denimstyle = document.getElementById('denim-style');
-              $(denimstyle).siblings('div[id="denim-style"]').children('input[type="checkbox"]').prop('checked',false);
-              console.log($(denimstyle).siblings('div[id="denim-style"]').children('input[type="checkbox"]'));
             }
           }
 
           document.getElementById('bottom-material-denim/jeans').onclick = denim;
-          $('input[type="checkbox"]').on('change', function() {
-            var id = $(this).parent('div[class="label-group"]').prop("id");
-            console.log(id);  
-            $(this).parent().siblings().children('input[type="checkbox"]').prop('checked', false);
-          });
+          // $('input[type="checkbox"]').on('change', function() {
+          //   var id = $(this).parent('div[class="label-group"]').prop("id");
+          //   console.log(id);  
+          //   $(this).parent().siblings().children('input[type="checkbox"]').prop('checked', false);
+          // });
        </script>
     </body>
 </html>

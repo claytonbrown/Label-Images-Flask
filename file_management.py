@@ -66,10 +66,10 @@ def getImagesLabellingList(clothing_type):
     path = 'static/Clothes/'+clothing_type+'/'
     #If CSV File Exists
     if os.path.isfile(CSVPATH):
-        for filename in glob.glob(path+'*.jpg'): #assuming jpg
+        for filename in sorted(glob.glob(path+'*.jpg')): #assuming jpg
             if not isFileLabelled(filename, CSVPATH):
                 images_file_list.append(filename)
     else:
-        for filename in glob.glob(path+'*.jpg'): #assuming jpg
+        for filename in sorted(glob.glob(path+'*.jpg')): #assuming jpg
             images_file_list.append(filename)
     return images_file_list
