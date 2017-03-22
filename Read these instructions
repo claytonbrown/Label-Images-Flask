@@ -1,5 +1,6 @@
 1) Copy the Clothes folder into the static folder
 2) Run python3 app.py
+4) Need to install flask
 3) Choose to label Tops/Bottoms/Shoes accordingly (your data set contains only one of the three types)
 
 LABELLING INSTRUCTIONS:
