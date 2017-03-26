@@ -2,6 +2,7 @@ from flask import (Flask, render_template, redirect,
                    url_for, request, make_response)
 from file_management import getImagesLabellingList, writeNewRow
 from options import TOPS, BOTTOMS, SHOES
+import time
 
 app = Flask(__name__)
 
@@ -13,6 +14,8 @@ shoes_count = 0
 TOPSPATH = 'static/Clothes/Tops'
 BOTTOMSPATH = 'static/Clothes/Bottoms'
 SHOESPATH = 'static/Clothes/Shoes'
+
+imageList = list()
 
 # @app.route('/')
 # def index():
@@ -45,8 +48,8 @@ def save_bottoms():
     labelledDict = dict(request.form.items()) #request the POST-ed info
     print(labelledDict)
     writeNewRow(dict(request.form.items()), 'Bottoms')
-    global tops_count
-    tops_count += 1
+    global bottoms_count
+    bottoms_count += 1
     return response
 
 @app.route('/save_shoes', methods=['POST'])
@@ -56,30 +59,42 @@ def save_shoes():
     labelledDict = dict(request.form.items()) #request the POST-ed info
     print(labelledDict)
     writeNewRow(dict(request.form.items()), 'Shoes')
-    global tops_count
-    tops_count += 1
-    ### HOW TO ROUTE BACK TO NEXT SHOE IMAGE???
+    global shoes_count
+    shoes_count += 1
     return response
 
 @app.route('/tops')
 def tops():
-    imageList = getImagesLabellingList('Tops')
+    global imageList
+    if len(imageList) == 0:
+        imageList = getImagesLabellingList('Tops')
+    else:
+        print("Images Left:", len(imageList)-tops_count)
     return render_template('tops.html',
         imageName=imageList[tops_count],
         options=TOPS)
 
 @app.route('/bottoms')
 def bottoms():
-    imageList = getImagesLabellingList('Bottoms')
+    global imageList
+    if len(imageList) == 0:
+        imageList = getImagesLabellingList('Bottoms')
+    else:
+        print("Images Left:", len(imageList)-bottoms_count)
     return render_template('bottoms.html',
         imageName=imageList[bottoms_count],
         options=BOTTOMS)
 
 @app.route('/shoes')
 def shoes():
-    imageList = getImagesLabellingList('Shoes')
+    global imageList
+    if len(imageList) == 0:
+        imageList = getImagesLabellingList('Shoes')
+    else:
+        print("Images Left:", len(imageList)-shoes_count)
     return render_template('shoes.html',
         imageName=imageList[shoes_count],
         options=SHOES)
 
-app.run(debug=True, port=8080, host='0.0.0.0')
+
+app.run(debug=True, port=3000, host='0.0.0.0')

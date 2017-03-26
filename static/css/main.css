@@ -32,13 +32,13 @@ body {
 
 .img-block {
   background-color: #3E5D85;
-  height:225vh;
+  height:100vh;
 }
 
 .label-block {
   padding: 32px;
   background-color: #C0D3EB;
-  height:225vh;
+  height:100vh;
 }
 
 .choice-selector {
@@ -77,4 +77,3 @@ input[type=checkbox] {
 .label-row{
   margin-top: 6px;
 }
-

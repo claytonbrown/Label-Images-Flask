@@ -2,6 +2,7 @@ import csv
 import os
 import glob
 import options
+import time
 
 #Change File Paths to Your Local Paths
 TOPSCSV = 'tops.csv'
@@ -39,7 +40,7 @@ def writeNewRow(data, clothing_type):
         if not file_exists:
             dataWriter.writeheader()  # file doesn't exist yet, write a header
         dataWriter.writerow(data)
-
+        
 #Checks if a file path already exists in CSV file
 def isFileLabelled(filename, CSVPATH):
     with open(CSVPATH, newline='') as csvfile:
