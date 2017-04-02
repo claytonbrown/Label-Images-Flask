@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+    <head>
+        <title>{% block title %}Flask Basics{% endblock %}</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+        <link rel="stylesheet" href="/static/css/main.css">
+
+    </head>
+    <body>
+        <div class="col-md-5 img-block" style="height:260vh">
+          <h3 id="image-title">{{imageDict['image_name']}}</h3>
+          <img class=".center-block label-image" src="../static/Clothes/Outfit/{{imageDict['image_name']}}" />
+        </div>
+        <div class="col-md-7 label-block" style="height:260vh">
+          <form action="{{ url_for('save_full_outfit') }}" method="POST">
+            <input type = "hidden" name = "image_name" value = "{{imageDict['image_name']}}" />
+            <!-- <input type = "hidden" name = "clothing_type" value = "tops" /> -->
+            <div class="btn-group" role="group" aria-label="...">
+              {% for category, choices in options.items() %}
+              <div class="label-group" id="{{category}}">
+                <h4><label class="label label-primary">{{category}}</label></h4>
+                <p class="label-row">
+                {% for choice in choices %}
+                  {% if 'color' in category %}
+                    {% if category|string+"-"+choice|string in imageDict%}
+                      {% if imageDict[category|string+"-"+choice|string] == '1' %}
+                        <span class="choice-selector">
+                          <input type="checkbox" id="{{category}}-{{choice}}" name="{{category}}-{{choice}}" value="1" style="background-color:{{choice}}" checked>
+                          <label for="{{category}}-{{choice}}" style="background-color:{{choice}}">{{choice}}</label>
+                        </span>
+                      {% else %}
+                        <span class="choice-selector">
+                          <input type="checkbox" id="{{category}}-{{choice}}" name="{{category}}-{{choice}}" value="1" style="background-color:{{choice}}">
+                          <label for="{{category}}-{{choice}}" style="background-color:{{choice}}">{{choice}}</label>
+                        </span>
+                      {% endif %}
+                    {% else %}
+                    <span class="choice-selector">
+                      <input type="checkbox" id="{{category}}-{{choice}}" name="{{category}}-{{choice}}" value="1" style="background-color:{{choice}}">
+                      <label for="{{category}}-{{choice}}" style="background-color:{{choice}}">{{choice}}</label>
+                    </span>
+                    {% endif %}
+                  {% else %}
+                    {% if category|string+"-"+choice|string in imageDict %}
+                      {% if imageDict[category|string+"-"+choice|string] == '1' %}
+                        <span class="choice-selector">
+                          <input type="checkbox" id="{{category}}-{{choice}}" name="{{category}}-{{choice}}" value="1" checked>
+                          <label for="{{category}}-{{choice}}" style="background-color:{{choice}}">{{choice}}</label>
+                        </span>
+                      {% else %}
+                        <span class="choice-selector">
+                          <input type="checkbox" id="{{category}}-{{choice}}" name="{{category}}-{{choice}}" value="1">
+                          <label for="{{category}}-{{choice}}" style="background-color:{{choice}}">{{choice}}</label>
+                        </span>
+                      {% endif %}
+                    {% else %}
+                    <span class="choice-selector">
+                      <input type="checkbox" id="{{category}}-{{choice}}" name="{{category}}-{{choice}}" value="1">
+                      <label for="{{category}}-{{choice}}" style="background-color:{{choice}}">{{choice}}</label>
+                    </span>
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              </p>
+            </div>
+              {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-success btn-lg btn-block">Done</button>
+            <!-- what is btn-success and btn-lg? -->
+          </form>
+        </div>
+        <script type="text/javascript">
+          if (document.getElementById('top-type-short-sleeve-t-shirt').checked == true ||
+            document.getElementById('top-type-long-sleeve-t-shirt').checked == true ||
+            document.getElementById('top-type-polo').checked == true ||
+            document.getElementById('top-type-singlet').checked == true)
+          {
+            document.getElementById('t-shirt-style').style.display = 'block';
+            document.getElementById('t-shirt-fit').style.display = 'block';
+            document.getElementById('shirt-style').style.display = 'none';
+            document.getElementById('shirt-fit').style.display = 'none';
+
+          } else if (document.getElementById('top-type-long-sleeve-shirt').checked == true ||
+            document.getElementById('top-type-short-sleeve-shirt').checked == true) {
+            document.getElementById('shirt-style').style.display = 'block';
+            document.getElementById('shirt-fit').style.display = 'block';
+            document.getElementById('t-shirt-style').style.display = 'none';
+            document.getElementById('t-shirt-fit').style.display = 'none';
+
+          } else {
+            document.getElementById('t-shirt-style').style.display = 'none';
+            document.getElementById('t-shirt-fit').style.display = 'none';
+            document.getElementById('t-shirt-style').style.display = 'none';
+            document.getElementById('t-shirt-fit').style.display = 'none';
+          }
+
+          if (document.getElementById('denim-style').checked == true) {
+            document.getElementById('denim-style').style.display = 'block';
+          } else {
+            document.getElementById('denim-style').style.display = 'none';
+          }
+
+          function tshirt(){
+            var state = document.getElementById('t-shirt-style').style.display
+            if (state == 'none') {
+              document.getElementById('t-shirt-style').style.display = 'block';
+              document.getElementById('t-shirt-fit').style.display = 'block';
+            }
+            else {
+              document.getElementById('t-shirt-style').style.display = 'none';
+              document.getElementById('t-shirt-fit').style.display = 'none';
+            }
+          }
+
+          function shirt(){
+            var state = document.getElementById('shirt-style').style.display
+            if (state == 'none') {
+              document.getElementById('shirt-style').style.display = 'block';
+              document.getElementById('shirt-fit').style.display = 'block';
+            }
+            else {
+              document.getElementById('shirt-style').style.display = 'none';
+              document.getElementById('shirt-fit').style.display = 'none';
+            }
+          }
+
+          function denim(){
+            var elem = document.getElementById('bottom-material-denim/jeans').checked;
+            if(elem == true){
+              document.getElementById('denim-style').style.display = 'block';
+            }
+            else{
+              document.getElementById('denim-style').style.display = 'none';
+            }
+          }
+
+          document.getElementById('bottom-material-denim/jeans').onclick = denim;
+          document.getElementById('top-type-short-sleeve-t-shirt').onclick = tshirt;
+          document.getElementById('top-type-long-sleeve-t-shirt').onclick = tshirt;
+          document.getElementById('top-type-polo').onclick = tshirt;
+          document.getElementById('top-type-singlet').onclick = tshirt;
+          document.getElementById('top-type-long-sleeve-shirt').onclick = shirt;
+          document.getElementById('top-type-short-sleeve-shirt').onclick = shirt;
+       </script>
+    </body>
+</html>

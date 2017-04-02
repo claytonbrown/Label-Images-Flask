@@ -18,6 +18,8 @@ def retrieveFieldNames(clothing_type):
         OPTS = options.BOTTOMS
     elif clothing_type == 'Shoes':
         OPTS = options.SHOES
+    elif clothing_type =='Full Outfit':
+        OPTS = options.FULL_OUTFIT
     fieldnames = list()
     fieldnames.append('image_name')
     for key in OPTS.keys():
@@ -40,7 +42,7 @@ def writeNewRow(data, clothing_type):
         if not file_exists:
             dataWriter.writeheader()  # file doesn't exist yet, write a header
         dataWriter.writerow(data)
-        
+
 #Checks if a file path already exists in CSV file
 def isFileLabelled(filename, CSVPATH):
     with open(CSVPATH, newline='') as csvfile:

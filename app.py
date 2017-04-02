@@ -1,19 +1,21 @@
 from flask import (Flask, render_template, redirect,
                    url_for, request, make_response)
 from file_management import getImagesLabellingList, writeNewRow
-from options import TOPS, BOTTOMS, SHOES
+from options import TOPS, BOTTOMS, SHOES, FULL_OUTFIT
 import time
+import outfit_management as om
 
 app = Flask(__name__)
-
-LABEL_CLASS = 2 #1 for classic, 2 for trendy, 0 for negative
 
 tops_count = 0
 bottoms_count = 0
 shoes_count = 0
+full_outfit_count = 0
+
 TOPSPATH = 'static/Clothes/Tops'
 BOTTOMSPATH = 'static/Clothes/Bottoms'
 SHOESPATH = 'static/Clothes/Shoes'
+TOPSPATH = 'static/Clothes/Tops'
 
 imageList = list()
 
@@ -63,6 +65,31 @@ def save_shoes():
     shoes_count += 1
     return response
 
+@app.route('/save_full_outfit', methods=['POST'])
+def save_full_outfit():
+    response = make_response(redirect(url_for('full_outfit')))
+    #Saves labels to CSV file
+    labelledDict = dict(request.form.items()) #request the POST-ed info
+    print(labelledDict)
+    om.writeNewRow(labelledDict, 'Full Outfit')
+    global full_outfit_count
+    full_outfit_count += 1
+    return response
+
+#TODO: Write new images into top.csv bottom.csv and shoes.csv as well
+
+@app.route('/full_outfit')
+def full_outfit():
+    global imageList
+    if len(imageList) == 0:
+        imageList = om.getImagesLabellingList()
+    else:
+        print("Images Left:", len(imageList)-full_outfit_count)
+
+    return render_template('full_outfit.html',
+        imageDict=imageList[full_outfit_count],
+        options=FULL_OUTFIT)
+
 @app.route('/tops')
 def tops():
     global imageList
@@ -71,7 +98,7 @@ def tops():
     else:
         print("Images Left:", len(imageList)-tops_count)
     return render_template('tops.html',
-        imageName=imageList[tops_count],
+        imageDict=imageList[tops_count],
         options=TOPS)
 
 @app.route('/bottoms')
@@ -97,4 +124,4 @@ def shoes():
         options=SHOES)
 
 
-app.run(debug=True, port=8080, host='0.0.0.0')
+app.run(debug=True, port=3000, host='0.0.0.0')
